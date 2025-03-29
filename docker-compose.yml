@@ -1,0 +1,41 @@
+services:
+  spark:
+    build:
+      context: .
+      dockerfile: Dockerfile.spark
+    networks:
+      - weather-net
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_DB=weather_data
+      - POSTGRES_USER=amira
+      - POSTGRES_PASSWORD=cookie
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  postgres:
+    image: postgres:13
+    networks:
+      - weather-net
+    environment:
+      POSTGRES_USER: amira
+      POSTGRES_PASSWORD: cookie
+      POSTGRES_DB: weather_data
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U amira -d weather_data"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+networks:
+  weather-net:
+    driver: bridge
+
+volumes:
+  pgdata:
