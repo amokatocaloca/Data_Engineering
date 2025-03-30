@@ -111,8 +111,6 @@ def write_to_postgres(spark_df):
         cur = conn.cursor()
 
     
-
-        # Access nested data correctly
         row = pdf.iloc[0]
         record_time = datetime.strptime(row['data']['time'].rstrip("Z"), "%Y-%m-%dT%H:%M:%S")
         cloudBase = row['data']['values']['cloudBase']
