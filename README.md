@@ -1,5 +1,6 @@
-Data Engineering & Topic Modeling Project
-This repository contains the code and data for a project that processes raw JSON data into CSV format and then applies topic modeling techniques to extract themes from the data using a Jupyter Notebook.
+Topic Modeling task
+
+This repository contains the code and data for a project that processes raw JSON data into CSV format and then applies topic modeling techniques to extract themes.
 
 Overview
 Raw Data: The initial dataset is provided in JSON format.
