@@ -11,16 +11,13 @@ from pyspark.sql.types import (
 )
 from pyspark.sql.functions import col
 
-# ------------------------------------------------------------------
-# 1) Spark session
-# ------------------------------------------------------------------
+#Spark session
 spark = SparkSession.builder \
     .appName("TomorrowIoBatchApp") \
     .getOrCreate()
 
-# ------------------------------------------------------------------
-# 2) Define schema
-# ------------------------------------------------------------------
+
+# Define schema
 weather_schema = StructType([
     StructField("data", StructType([
         StructField("time", StringType(), True),
@@ -58,9 +55,7 @@ weather_schema = StructType([
     ]), True)
 ])
 
-# ------------------------------------------------------------------
-# 3) Tomorrow.io API URL
-# ------------------------------------------------------------------
+#Tomorrow.io API URL
 api_url = "https://api.tomorrow.io/v4/weather/realtime?location=almaty&apikey=MdtJ4G3OgyB7Dk7oitngojT7iNYpYGQ4"
 
 def fetch_tomorrowio_data():
@@ -90,9 +85,7 @@ def force_values_to_floats(data_dict):
                 data_dict["data"]["values"][key] = float(val)
     return data_dict
 
-# ------------------------------------------------------------------
-# 4) PostgreSQL writing function
-# ------------------------------------------------------------------
+#PostgreSQL writing function
 def write_to_postgres(spark_df):
     pdf = spark_df.toPandas()
     if pdf.empty:
@@ -167,9 +160,7 @@ def write_to_postgres(spark_df):
         if conn:
             conn.close()
 
-# ------------------------------------------------------------------
-# 5) Main loop
-# ------------------------------------------------------------------
+# Main loop
 def main():
     while True:
         print("Fetching data from Tomorrow.io...")
