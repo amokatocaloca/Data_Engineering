@@ -6,6 +6,11 @@ This project is a simple weather data ingestion pipeline. It fetches real-time w
 
 - [Docker](https://www.docker.com/)
 - [Docker Compose](https://docs.docker.com/compose/)
+- Install the required Python packages by running:
+
+```bash
+pip install -r requirements.txt
+```
 
 ## Project Structure
 
@@ -40,5 +45,5 @@ This command opens the PostgreSQL interactive terminal. You can run SQL queries 
 ## Additional Notes
 
 - The pipeline fetches weather data every 180 seconds
-- Ensure your Tomorrow.io API key is set correctly in the `api_url` variable within `main.py`
 - Logs from the Docker containers provide details on the fetching, processing, and writing operations
+  
