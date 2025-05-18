@@ -22,6 +22,7 @@ pip install -r requirements.txt
 ## Building and Running the Containers
 
 1. **Build and start the containers:**  
+   Make sure that your Docker doaemon is open running first!
    Open a terminal in the project directory and run:
    ```bash
    docker-compose up --build
